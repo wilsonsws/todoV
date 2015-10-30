@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css">
+<!-- <script src="http://apps.bdimg.com/libs/angular.js/1.3.9/angular.min.js"></script> -->
+
+<body id="todoapp">
+
+<div class="container">
+
+<h3>Vue.js TODO</h3>
+<h4>by wilsonsws</h4>
+
+<table class="table table-striped">
+  <thead><tr>
+    <th>Action</th>
+    <th>Content</th>
+    <th>Statue</th>
+  </tr></thead>
+  <tbody><tr v-repeat="todo in todos">
+    <td>
+	  <button class="btn" v-on="click:changeFinish(todo.time)" v-disabled="todo.fstatus">
+      <span class="glyphicon glyphicon-pencil"></span>  Finished
+	  </button>
+	  <button class="btn" v-on="click:changeRelease(todo.time)" v-disabled="!todo.fstatus">
+      <span class="glyphicon glyphicon-pencil"></span>  Release
+      </button>
+	  <button class="btn" v-on="click:deletItem(todo.time)">
+      <span class="glyphicon glyphicon-pencil"></span>  Delet
+      </button>
+      <button class="btn" v-on="click:editItem(todo.time)">
+      <span class="glyphicon glyphicon-pencil"></span>  Edit
+      </button>	  
+    </td>
+    <td v-show="todo.fstatus">{{ todo.content }}</td>
+	<td v-show="!todo.fstatus" style="color:red">{{ todo.content }}</td>
+    <td v-show="todo.fstatus">Done</td>
+	<td v-show="!todo.fstatus" style="color:red">Undo</td>
+  </tr></tbody>
+</table>
+
+<hr>
+<hr>
+
+<h3 v-show="!edit">Create New TODO:</h3>
+<h3 v-show="edit">Edit Previous TODO:</h3>
+
+<form class="form-horizontal">
+<div class="form-group">
+  <label class="col-sm-2 control-label">content:</label>
+  <div class="col-sm-10">
+    <input type="text" v-model="content" placeholder="Input content">
+	<button class="btn btn-success" v-disabled="!incomplete" v-on="click:updateItem()">
+      <span class="glyphicon glyphicon-save"></span> Update
+    </button>
+  </div>
+</div>
+</form>
+
+<hr>
+<button class="btn btn-success" v-disabled="edit" v-on="click:creatItem()">
+  <span class="glyphicon glyphicon-todo"></span> Create New todo
+</button>
+
+<button class="btn btn-success" v-on="click:rreset()">
+  <span class="glyphicon glyphicon-todo"></span> Reset All
+</button>
+</div>
+</body>
+
+<script type="text/javascript" src = "myTODO.js"></script>
+<script type="text/javascript" src = "dist/vue.js"></script>
+<script type="text/javascript" src = "storedb.js"></script>
+</html>
